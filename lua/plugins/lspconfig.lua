@@ -210,6 +210,8 @@ return {
       local servers = {
 
         clangd = {},
+        bashls = {},
+        cssls = {},
         csharp_ls = {},
         -- gopls = {},
         -- pyright = {},
