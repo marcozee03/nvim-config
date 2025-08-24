@@ -212,9 +212,10 @@ return {
         clangd = {},
         bashls = {},
         cssls = {},
+        qmlls = {},
         csharp_ls = {},
-        -- gopls = {},
         pyright = {},
+        -- gopls = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
