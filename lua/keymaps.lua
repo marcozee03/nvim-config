@@ -51,4 +51,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Same autocommand written with a Lua function instead
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
+  pattern = { '*.c', '*.h' },
+  callback = function()
+    require(colorizer)
+  end,
+})
+
 -- vim: ts=2 sts=2 sw=2 et
