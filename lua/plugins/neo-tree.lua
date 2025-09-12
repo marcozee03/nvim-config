@@ -15,6 +15,11 @@ return {
   },
   opts = {
     filesystem = {
+      bind_to_cwd = true,
+      cwd_target = {
+        sidebar = 'tab',
+        current = 'window',
+      },
       window = {
         mappings = {
           ['\\'] = 'close_window',

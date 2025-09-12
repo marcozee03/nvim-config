@@ -16,7 +16,19 @@ return {
     config = function()
       require('neotest').setup {
         adapters = {
-          require 'neotest-jest',
+          require 'neotest-jest' {
+            jestCommand = 'npm test --',
+            jestArguments = function(defaultArguments, context)
+              return defaultArguments
+            end,
+            env = { CI = true },
+            cwd = function(path)
+              return vim.fn.getcwd()
+            end,
+            isTestFile = function(file_path)
+              return string.match(string.lower(file_path), '.test.ts') or string.match(string.lower(file_path), '.test.ts')
+            end,
+          },
           require 'neotest-plenary',
           require('neotest-gtest').setup {},
           require 'neotest-dotnet',
