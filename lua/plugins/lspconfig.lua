@@ -212,6 +212,7 @@ return {
         clangd = {},
         bashls = {},
         cssls = {},
+        glsl_analyzer = {},
         qmlls = {},
         eslint = {},
         csharp_ls = {},
