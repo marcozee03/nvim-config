@@ -11,6 +11,7 @@ return {
       lint.linters_by_ft['markdown'] = { 'markdownlint' }
       lint.linters_by_ft['cpp'] = { 'trivy' }
       lint.linters_by_ft['cs'] = { 'trivy' }
+      lint.linters_by_ft['rst'] = { 'sphinx-lint' }
       -- However, note that this will enable a set of default linters,
       -- which will cause errors unless these tools are available:
       -- {
@@ -33,7 +34,6 @@ return {
       lint.linters_by_ft['janet'] = nil
       -- lint.linters_by_ft['json'] = nil
       -- lint.linters_by_ft['markdown'] = nil
-      lint.linters_by_ft['rst'] = nil
       lint.linters_by_ft['ruby'] = nil
       lint.linters_by_ft['terraform'] = nil
       lint.linters_by_ft['text'] = nil
