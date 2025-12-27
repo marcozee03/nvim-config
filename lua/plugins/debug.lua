@@ -24,7 +24,6 @@ return {
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
     'samsung/netcoredbg',
-    'microsoft/vscode-js-debug',
     'vadimcn/vscode-lldb',
   },
   keys = {

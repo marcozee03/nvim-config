@@ -47,9 +47,6 @@ require('lazy').setup({
 
   require 'plugins/neogen',
   {
-    'nvim-neotest/neotest-jest',
-  },
-  {
     'nvim-neotest/neotest-plenary',
   },
   {
