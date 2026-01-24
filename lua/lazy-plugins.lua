@@ -37,6 +37,8 @@ require('lazy').setup({
 
   require 'plugins/blink-cmp',
 
+  require 'plugins/roslyn',
+
   require 'plugins/todo-comments',
 
   require 'plugins/mini',
