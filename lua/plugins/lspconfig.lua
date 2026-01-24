@@ -218,7 +218,9 @@ return {
         -- roslyn = {},
         -- roslyn_ls = {},
         glsl_analyzer = {},
-        qmlls = {},
+        qmlls = {
+          cmd = { 'qmlls6' },
+        },
         pyright = {},
         -- gopls = {},
         -- rust_analyzer = {},
