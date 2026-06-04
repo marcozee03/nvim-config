@@ -75,4 +75,5 @@ vim.o.expandtab = true
 vim.o.shiftwidth = 4
 vim.o.fixeol = false
 vim.o.eol = false
+vim.opt.fileformats = { 'unix', 'dos', 'mac' }
 -- vim: ts=2 sts=2 sw=2 et
