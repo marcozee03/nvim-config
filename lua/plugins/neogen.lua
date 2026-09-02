@@ -14,7 +14,7 @@ return {
           },
         },
       }
-      local opts = { noremap = true, silent = true }
+      local opts = { noremap = true, silent = true, desc = 'Generate Doc Comment' }
       vim.keymap.set('n', '<Leader>nf', ":lua require('neogen').generate()<CR>", opts)
       return true
     end,

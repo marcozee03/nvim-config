@@ -37,8 +37,6 @@ require('lazy').setup({
 
   require 'plugins/blink-cmp',
 
-  require 'plugins/roslyn',
-
   require 'plugins/todo-comments',
 
   require 'plugins/mini',
@@ -60,6 +58,7 @@ require('lazy').setup({
   require 'plugins/neotest',
   require 'plugins/tiny-inline-diagnostic',
 
+  require 'plugins/text-case',
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- place them in the correct locations.
@@ -69,13 +68,25 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  require 'plugins/debug',
+  -- require 'plugins/debug',
   -- require 'kickstart.plugins.indent_line',
   require 'plugins.lint',
   require 'plugins.autopairs',
   require 'plugins.neo-tree',
+  require 'plugins.roslyn',
   vim.lsp.enable 'gdscript',
-  -- vim.lsp.config("roslyn", {})
+  vim.lsp.enable 'gdshader_lsp',
+  vim.lsp.config('roslyn', {
+    settings = {
+      ['csharp|inlay_hints'] = {
+        csharp_enable_inlay_hints_for_implicit_object_creation = true,
+        csharp_enable_inlay_hints_for_implicit_variable_types = true,
+      },
+      ['csharp|code_lens'] = {
+        dotnet_enable_references_code_lens = true,
+      },
+    },
+  }),
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
