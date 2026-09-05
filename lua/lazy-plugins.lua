@@ -20,10 +20,9 @@ require('lazy').setup({
   -- Use `opts = {}` to automatically pass options to a plugin's `setup()` function, forcing the plugin to be loaded.
   --
   require 'plugins/colorizer',
+  require 'plugins/colorful-menu',
   -- modular approach: using `require 'path/name'` will
   -- include a plugin definition from file lua/path/name.lua
-
-  require 'themes/tokyonight',
 
   require 'plugins/gitsigns',
 
@@ -46,16 +45,7 @@ require('lazy').setup({
   require 'plugins/undotree',
 
   require 'plugins/neogen',
-  {
-    'nvim-neotest/neotest-plenary',
-  },
-  {
-    'alfaix/neotest-gtest',
-  },
-  {
-    'Issafalcon/neotest-dotnet',
-  },
-  require 'plugins/neotest',
+  -- require 'plugins/neotest',
   require 'plugins/tiny-inline-diagnostic',
 
   require 'plugins/text-case',

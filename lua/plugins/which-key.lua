@@ -27,9 +27,10 @@ return {
       icons = { mappings = vim.g.have_nerd_font },
 
       -- Document existing key chains
+      ---@type wk.Spec
       spec = {
         { '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
-        { '<leader>r', group = '[R]ename', mode = { 'n' } },
+        { '<leader>r', group = '[R]ename', mode = { 'n' }, icon = { icon = '󰑕', hl = 'Constant' } },
         { '<leader>t', group = '[T]oggle' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } }, -- Enable gitsigns recommended keymaps first
         { 'gr', group = 'LSP Actions', mode = { 'n' } },

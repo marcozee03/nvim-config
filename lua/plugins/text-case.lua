@@ -1,8 +1,9 @@
+---@type LazySpec
 return {
   'johmsalas/text-case.nvim',
   dependencies = { 'nvim-telescope/telescope.nvim' },
   config = function()
-    require('textcase').setup {}
+    require('textcase').setup { default_keymappings_enabled = false }
     local textcase = require 'textcase'
     -- vim.keymap.set('n', '<Leader>rs', "", opts)
     local function def_map(mode, l, r, desc, bufnr)
@@ -49,17 +50,12 @@ return {
       if not vim.api.nvim_buf_is_valid(bufnr) then
         return
       end
-      def_map('n', '<leader>rs', 'to_snake_case', '[s]nake case', bufnr)
-      def_map('n', '<leader>rp', 'to_pascal_case', '[p]ascal case', bufnr)
-      def_map('n', '<leader>rc', 'to_camel_case', '[c]amel case', bufnr)
-      def_map('n', '<leader>rC', 'to_constant_case', '[C]onstant case', bufnr)
-      def_map('n', '<leader>rk', 'to_kebab_case', '[k]ebab case', bufnr)
+      def_map('n', '<leader>rs', 'to_snake_case', '[s]nake_case', bufnr)
+      def_map('n', '<leader>rp', 'to_pascal_case', '[P]ascalCase', bufnr)
+      def_map('n', '<leader>rc', 'to_camel_case', '[c]amelCase', bufnr)
+      def_map('n', '<leader>rC', 'to_constant_case', '[C]ONSTANT_CASE', bufnr)
+      def_map('n', '<leader>rk', 'to_kebab_case', '[k]ebab-case', bufnr)
     end
-    map('n', '<leader>Rs', 'to_snake_case', '[s]nake case')
-    map('n', '<leader>Rp', 'to_pascal_case', '[p]ascal case')
-    map('n', '<leader>Rc', 'to_camel_case', '[c]amel case')
-    map('n', '<leader>RC', 'to_constant_case', '[C]onstant case')
-    map('n', '<leader>Rk', 'to_kebab_case', '[k]ebab case')
 
     -- Set the "no LSP" keymap for every buffer by default
     vim.api.nvim_create_autocmd('BufEnter', {
