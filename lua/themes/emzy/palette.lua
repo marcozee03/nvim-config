@@ -62,7 +62,7 @@ local colorScheme = {
     dark = '#62001a',
     semidark = '#a31757',
     mid = '#db4668',
-    semilight = '#ee908c',
+    light = '#ee908c',
   },
 
   orange0 = '#f37b00',
