@@ -4,7 +4,8 @@
 local colorScheme = {
   ---@type Swatch5
   bg = {
-    dark = '#221b41',
+    -- dark = '#221b41',
+    dark = 'none',
     semidark = '#29224c',
     mid = '#322a5c',
     semilight = '#3b326b',

@@ -51,13 +51,13 @@ return {
       --     stopOnEntry = false,
       --   },
       -- }
-      vim.keymap.set('n', '<space>b', dap.toggle_breakpoint)
-      vim.keymap.set('n', '<space>gb', dap.run_to_cursor)
+      vim.keymap.set('n', '<space>b', dap.toggle_breakpoint, { desc = 'toggle breakpoint' })
+      vim.keymap.set('n', '<space>gb', dap.run_to_cursor, { desc = 'run to cursor' })
 
       -- Eval var under cursor
-      vim.keymap.set('n', '<space>?', function()
-        require('dapui').eval(nil, { enter = true })
-      end)
+      -- vim.keymap.set('n', '<space>?', function()
+      --   require('dapui').eval(nil, { enter = true })
+      -- end)
       -- Change breakpoint icons
       local breakpoint_icons = vim.g.have_nerd_font
           and { Breakpoint = '', BreakpointCondition = '', BreakpointRejected = '', LogPoint = '', Stopped = '' }

@@ -2,31 +2,74 @@
 return {
   'johmsalas/text-case.nvim',
   dependencies = { 'nvim-telescope/telescope.nvim' },
-  config = function()
-    require('textcase').setup { default_keymappings_enabled = false }
+  opts = {
+    default_keymappings_enabled = false,
+  },
+  keys = {
+    {
+      '<leader>rs',
+      function()
+        require('textcase').current_word 'to_snake_case'
+      end,
+      mode = 'n',
+      desc = '[s]nake_case',
+      noremap = true,
+      silent = true,
+    },
+    {
+      '<leader>rP',
+      function()
+        require('textcase').current_word 'to_pascal_case'
+      end,
+      mode = 'n',
+      desc = '[P]ascalCase',
+      noremap = true,
+      silent = true,
+    },
+    {
+      '<leader>rp',
+      function()
+        require('textcase').current_word 'to_path_case'
+      end,
+      mode = 'n',
+      desc = '[P]ath/Case',
+      noremap = true,
+      silent = true,
+    },
+    {
+      '<leader>rc',
+      function()
+        require('textcase').current_word 'to_camel_case'
+      end,
+      mode = 'n',
+      desc = '[c]amelCase',
+      noremap = true,
+      silent = true,
+    },
+    {
+      '<leader>rC',
+      function()
+        require('textcase').current_word 'to_constant_case'
+      end,
+      mode = 'n',
+      desc = '[C]ONSTANT_CASE',
+      noremap = true,
+      silent = true,
+    },
+
+    {
+      '<leader>rk',
+      function()
+        require('textcase').current_word 'to_dash_case'
+      end,
+      mode = 'n',
+      desc = '[k]ebab-case',
+    },
+  },
+  config = function(_, opts)
+    require('textcase').setup { opts }
     local textcase = require 'textcase'
     -- vim.keymap.set('n', '<Leader>rs', "", opts)
-    local function def_map(mode, l, r, desc, bufnr)
-      vim.keymap.set(mode, l, function()
-        textcase.current_word(r)
-      end, {
-        buffer = bufnr,
-        desc = desc,
-        noremap = true,
-        silent = true,
-      })
-    end
-
-    local function map(mode, l, r, desc)
-      vim.keymap.set(mode, l, function()
-        textcase.current_word(r)
-      end, {
-        desc = desc,
-        noremap = true,
-        silent = true,
-      })
-    end
-
     local function lsp_map(mode, l, r, desc, bufnr)
       vim.keymap.set(mode, l, function()
         textcase.lsp_rename(r)
@@ -38,34 +81,27 @@ return {
       })
     end
 
-    -- def_map('n', '<leader>rs', 'to_snake_case', '[s]nake case', vim.lsp.buf)
-    local function lsp_mappings(bufnr)
-      lsp_map('n', '<leader>rs', 'to_snake_case', 'LSP: [s]nake case', bufnr)
-      lsp_map('n', '<leader>rp', 'to_pascal_case', 'LSP: [p]ascal case', bufnr)
-      lsp_map('n', '<leader>rc', 'to_camel_case', 'LSP: [c]amel case', bufnr)
-      lsp_map('n', '<leader>rC', 'to_constant_case', 'LSP: [C]onstant case', bufnr)
-      lsp_map('n', '<leader>rk', 'to_kebab_case', 'LSP: [k]ebab case', bufnr)
-    end
-    local function def_mappings(bufnr)
-      if not vim.api.nvim_buf_is_valid(bufnr) then
-        return
-      end
-      def_map('n', '<leader>rs', 'to_snake_case', '[s]nake_case', bufnr)
-      def_map('n', '<leader>rp', 'to_pascal_case', '[P]ascalCase', bufnr)
-      def_map('n', '<leader>rc', 'to_camel_case', '[c]amelCase', bufnr)
-      def_map('n', '<leader>rC', 'to_constant_case', '[C]ONSTANT_CASE', bufnr)
-      def_map('n', '<leader>rk', 'to_kebab_case', '[k]ebab-case', bufnr)
+    local function lsp_map_del(mode, l, bufnr)
+      vim.keymap.del(mode, l, {
+        buffer = bufnr,
+      })
     end
 
-    -- Set the "no LSP" keymap for every buffer by default
-    vim.api.nvim_create_autocmd('BufEnter', {
-      callback = function(args)
-        -- only set fallback if no client is currently attached
-        if #vim.lsp.get_clients { bufnr = args.buf } == 0 then
-          def_mappings(args.buf)
-        end
-      end,
-    })
+    -- def_map('n', '<leader>rs', 'to_snake_case', '[s]nake case', vim.lsp.buf)
+    local function lsp_mappings(bufnr)
+      lsp_map('n', '<leader>rs', 'to_snake_case', 'LSP: [s]nake_case', bufnr)
+      lsp_map('n', '<leader>rP', 'to_pascal_case', 'LSP: [P]ascalCase', bufnr)
+      lsp_map('n', '<leader>rc', 'to_camel_case', 'LSP: [c]amelCase', bufnr)
+      lsp_map('n', '<leader>rC', 'to_constant_case', 'LSP: [C]ONSTANT_CASE', bufnr)
+      lsp_map('n', '<leader>rk', 'to_kebab_case', 'LSP: [k]ebab-case', bufnr)
+    end
+    local function lsp_mappings_del(bufnr)
+      lsp_map_del('n', '<leader>rs', bufnr)
+      lsp_map_del('n', '<leader>rp', bufnr)
+      lsp_map_del('n', '<leader>rc', bufnr)
+      lsp_map_del('n', '<leader>rC', bufnr)
+      lsp_map_del('n', '<leader>rk', bufnr)
+    end
 
     -- Override with LSP keymap when a client attaches
     vim.api.nvim_create_autocmd('LspAttach', {
@@ -79,7 +115,7 @@ return {
       callback = function(args)
         vim.schedule(function()
           if #vim.lsp.get_clients { bufnr = args.buf } == 0 then
-            def_mappings(args.buf)
+            lsp_mappings_del(args.buf)
           end
         end)
       end,
